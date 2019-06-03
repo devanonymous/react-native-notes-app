@@ -1,10 +1,11 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from "./screens/HomeScreen";
+import FoldersScreen from "./screens/FoldersScreen";
 
 const RootStack = createStackNavigator(
     {
-        Home: HomeScreen,
+        Home: FoldersScreen,
         // Details: DetailsScreen,
     },
     {
