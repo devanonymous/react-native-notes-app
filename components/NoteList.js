@@ -16,10 +16,10 @@ export const NoteList = ({ notes }) => {
                 <Note text={note.content} />
             </View>
         )
-    })
+    });
     return (
         <View>
             {list}
         </View>
     )
-}
+};

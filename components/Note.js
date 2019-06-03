@@ -3,8 +3,10 @@ import {
     View,
     Dimensions,
     Text,
-    TextInput
+    TextInput,
 } from 'react-native';
+import {Ionicons} from '@expo/vector-icons'
+import {Button} from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
@@ -19,15 +21,21 @@ const styles = EStyleSheet.create({
         borderColor: '#252333'
     },
     Header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         height: 50,
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
         backgroundColor: '#00358c'
     },
     Title: {
+        // flex: 1,
         marginTop: 'auto',
         marginLeft: 20,
         marginBottom: 'auto'
+    },
+    DeleteBtn: {
+        marginRight: 3
     },
     Text: {
         fontSize: 20,
@@ -50,13 +58,19 @@ const styles = EStyleSheet.create({
     }
 });
 
-export const Note = ({ text, onPress, onChangeText }) => {
+export const Note = ({text, onPress, onChangeText}) => {
 
     return (
         <View style={styles.NoteCard}>
             <View style={styles.Header}>
                 <View style={styles.Title}>
                     <Text style={styles.Text} onPress={onPress}>My true love </Text>
+                </View>
+                <View style={styles.DeleteBtn}>
+                    <Button
+                        icon={<Ionicons name="ios-trash" size={32} color="white"/>}
+                        type="clear"
+                    />
                 </View>
             </View>
             <View style={styles.NotePad}>
@@ -66,4 +80,4 @@ export const Note = ({ text, onPress, onChangeText }) => {
             </View>
         </View>
     )
-}
+};
