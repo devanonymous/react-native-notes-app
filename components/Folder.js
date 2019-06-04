@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 import {removeFolder} from "../redux/actions/foldersActions";
 
 const Folder = (props) => {
-    const {item, styles, id, dispatch} = props;
+    const {item, styles, folderId, dispatch} = props;
 
     return (
         <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
@@ -17,7 +17,7 @@ const Folder = (props) => {
                         {item.text}
                     </Text>
                     <Button
-                        onPress={() => props.removeFolder(id)}
+                        onPress={() => props.removeFolder(folderId)}
                         icon={<Ionicons name="ios-trash" size={32} color="white"/>}
                         type="clear"
                     />

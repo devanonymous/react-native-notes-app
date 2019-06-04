@@ -4,7 +4,6 @@ import {
     Text,
     View,
     FlatList,
-    Platform,
     TextInput
 } from "react-native";
 import Folder from "../components/Folder";
@@ -22,18 +21,20 @@ class FoldersScreen extends Component {
         headerTintColor: '#fff',
     };
 
+    state = {text: ''};
+
     changeTextHandler = (text) => {
-      this.newFolderName = text;
+        this.setState({text});
     };
 
     addTask = () => {
-        if (this.newFolderName) {
-            this.props.addFolder(this.newFolderName)
+        if (this.state.text) {
+            this.props.addFolder(this.state.text);
+            this.setState({text:''});
         }
     };
 
     render() {
-        console.log('Folders screnn rerendered!!!!!!!!!!!!!!!!!!!!!!!!!!!', this.props)
         const {folders} = this.props;
         return (
             <View
@@ -44,7 +45,7 @@ class FoldersScreen extends Component {
                     style={styles.textInput}
                     onChangeText={this.changeTextHandler}
                     onSubmitEditing={this.addTask}
-                    value={this.newFolderName}
+                    value={this.state.text}
                     placeholder="Add Folder"
                     returnKeyType="done"
                     returnKeyLabel="done"
@@ -52,7 +53,7 @@ class FoldersScreen extends Component {
                 <FlatList
                     style={styles.list}
                     data={folders}
-                    renderItem={({item, index}) => <Folder onPress={() => alert('fuck')} id={index} item={item} styles={styles}/>
+                    renderItem={({item, index}) => <Folder onPress={() => alert('fuck')} folderId={index} item={item} styles={styles}/>
 
                     }
                     keyExtractor={(item, index) => index.toString()}
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingLeft: 10,
         borderColor: "gray",
+        color: "gray",
         borderWidth: 1,
         width: "100%"
     }

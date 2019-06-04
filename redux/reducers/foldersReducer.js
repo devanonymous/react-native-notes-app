@@ -7,11 +7,11 @@ const foldersReducer = (state = initialState, action) => {
         case ADD_FOLDER:
             return [{text:action.payload}, ...state];
         case REMOVE_FOLDER:
-            return state.filter((item, index) => {
-                if (index === action.payload) {
-                    return false
-                }
-            });
+
+            const newState = [...state];
+            newState.splice(action.payload, 1);
+            console.log('action payload!!!!!!!!!!!!!!!!!', action.payload, newState);
+            return newState;
         default:
             return state
     }
