@@ -7,18 +7,22 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@expo/vector-icons": "latest",
+    "@expo/vector-icons": "^10.0.1",
     "expo": "^32.0.0",
-    "react": "16.5.0",
+    "react": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-elements": "^1.1.0",
     "react-native-extended-stylesheet": "^0.11.2",
     "react-navigation": "^3.11.0",
-    "react-redux": "^7.0.3",
-    "redux": "^4.0.1"
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.10.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^5.0.0",
+    "remote-redux-devtools": "^0.5.16",
+    "schedule": "^0.4.0"
   },
   "private": true
 }

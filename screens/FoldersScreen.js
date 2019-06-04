@@ -8,10 +8,12 @@ import {
     TextInput
 } from "react-native";
 import Folder from "../components/Folder";
+import {connect} from "react-redux";
+import {addFolder} from "../redux/actions/foldersActions";
 
 const viewPadding = 10;
 
-export default class FoldersScreen extends Component {
+class FoldersScreen extends Component {
     static navigationOptions = {
         title: 'Folders',
         headerStyle: {
@@ -19,29 +21,38 @@ export default class FoldersScreen extends Component {
         },
         headerTintColor: '#fff',
     };
-    state = {
-        tasks: [{text: 'dick'}, {text: 'dick'}, {text: 'dick'},{text: 'dick'},{text: 'dick'}],
-        text: ""
+
+    changeTextHandler = (text) => {
+      this.newFolderName = text;
+    };
+
+    addTask = () => {
+        if (this.newFolderName) {
+            this.props.addFolder(this.newFolderName)
+        }
     };
 
     render() {
+        console.log('Folders screnn rerendered!!!!!!!!!!!!!!!!!!!!!!!!!!!', this.props)
+        const {folders} = this.props;
         return (
             <View
-                style={[styles.container, {paddingBottom: this.state.viewMargin}]}
+                style={[styles.container]}
             >
+                <Text>We have {this.props.folders.length} elements</Text>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={this.changeTextHandler}
                     onSubmitEditing={this.addTask}
-                    value={this.state.text}
+                    value={this.newFolderName}
                     placeholder="Add Folder"
                     returnKeyType="done"
                     returnKeyLabel="done"
                 />
                 <FlatList
                     style={styles.list}
-                    data={this.state.tasks}
-                    renderItem={({item, index}) => <Folder onPress={() => alert('fuck')}  item={item} styles={styles} key={index}/>
+                    data={folders}
+                    renderItem={({item, index}) => <Folder onPress={() => alert('fuck')} id={index} item={item} styles={styles}/>
 
                     }
                     keyExtractor={(item, index) => index.toString()}
@@ -51,7 +62,20 @@ export default class FoldersScreen extends Component {
         );
     }
 }
+//
+const mapStateToProps = state => {
+    return {
+        folders: state.folders,
+    }
+};
 
+const mapDispatchToProps = dispatch => {
+    return {
+        addFolder: (name) => dispatch(addFolder(name))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FoldersScreen);
 
 const styles = StyleSheet.create({
     container: {
