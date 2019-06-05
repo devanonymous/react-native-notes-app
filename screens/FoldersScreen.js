@@ -34,12 +34,12 @@ class FoldersScreen extends Component {
         }
     };
 
+
+
     render() {
         const {folders} = this.props;
         return (
-            <View
-                style={[styles.container]}
-            >
+            <View style={[styles.container]}>
                 <Text>We have {this.props.folders.length} elements</Text>
                 <TextInput
                     style={styles.textInput}
@@ -53,7 +53,7 @@ class FoldersScreen extends Component {
                 <FlatList
                     style={styles.list}
                     data={folders}
-                    renderItem={({item, index}) => <Folder onPress={() => alert('fuck')} folderId={index} item={item} styles={styles}/>
+                    renderItem={({item, index}) => <Folder navigation={this.props.navigation} folderId={index} item={item} styles={styles}/>
 
                     }
                     keyExtractor={(item, index) => index.toString()}
@@ -63,7 +63,6 @@ class FoldersScreen extends Component {
         );
     }
 }
-//
 const mapStateToProps = state => {
     return {
         folders: state.folders,

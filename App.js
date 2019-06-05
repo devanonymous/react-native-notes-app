@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
-import HomeScreen from "./screens/HomeScreen";
+import NotesScreen from "./screens/NotesScreen";
 import FoldersScreen from "./screens/FoldersScreen";
 import {PersistGate} from 'redux-persist/integration/react';
 
@@ -9,11 +9,11 @@ import {Provider} from "react-redux";
 
 const RootStack = createStackNavigator(
     {
-        Home: FoldersScreen,
-        // Details: DetailsScreen,
+        Folders: FoldersScreen,
+        Notes: NotesScreen,
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Folders',
     }
 );
 

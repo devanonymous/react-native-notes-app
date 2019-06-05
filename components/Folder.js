@@ -7,10 +7,17 @@ import {connect} from "react-redux";
 import {removeFolder} from "../redux/actions/foldersActions";
 
 const Folder = (props) => {
-    const {item, styles, folderId, dispatch} = props;
+    const {item, styles, navigation, folderId, dispatch} = props;
+
+    /**
+     * @param { string } folderId
+     */
+    const onFolderPress = (folderId) => () => {
+        navigation.navigate('Notes', {folderId})
+    };
 
     return (
-        <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+        <TouchableWithoutFeedback onPress={onFolderPress(item.id)}>
             <View>
                 <View style={styles.listItemCont}>
                     <Text style={styles.listItem}>

@@ -8,7 +8,7 @@ import {NoteList} from '../components/NoteList';
 
 EStyleSheet.build();
 
-export default class HomeScreen extends Component {
+export default class NotesScreen extends Component {
     static navigationOptions = {
         title: 'Todos',
         headerStyle: {
