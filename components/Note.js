@@ -8,6 +8,8 @@ import {
 import {Ionicons} from '@expo/vector-icons'
 import {Button} from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {connect} from "react-redux";
+import {removeNote} from "../redux/actions/notesActions";
 
 const styles = EStyleSheet.create({
     NoteCard: {
@@ -58,7 +60,7 @@ const styles = EStyleSheet.create({
     }
 });
 
-export const Note = ({note, onPress, onChangeText}) => {
+const Note = ({id, note, onPress, onChangeText, removeNote}) => {
 
     return (
         <View style={styles.NoteCard}>
@@ -68,6 +70,7 @@ export const Note = ({note, onPress, onChangeText}) => {
                 </View>
                 <View style={styles.DeleteBtn}>
                     <Button
+                        onPress={() => removeNote(id)}
                         icon={<Ionicons name="ios-trash" size={32} color="white"/>}
                         type="clear"
                     />
@@ -83,3 +86,9 @@ export const Note = ({note, onPress, onChangeText}) => {
         </View>
     )
 };
+
+const mapDispatchToProps = dispatch => ({
+    removeNote: id => dispatch(removeNote(id)),
+});
+
+export default connect(null, mapDispatchToProps)(Note);

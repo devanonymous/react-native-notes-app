@@ -63,7 +63,7 @@ class NotesScreen extends Component {
                 <View style={styles.list}>
                     <ScrollView>
                         <View style={styles.notes}>
-                            <NoteList notes={this.props.notes}/>
+                            <NoteList folderId={this.props.navigation.state.params.folderId} notes={this.props.notes}/>
                         </View>
                     </ScrollView>
                 </View>

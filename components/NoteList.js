@@ -6,15 +6,17 @@ import {
     TextInput
 } from 'react-native';
 
-import { Note } from './Note';
+import Note from './Note';
 
-export const NoteList = ({ notes }) => {
+export const NoteList = ({ notes, folderId }) => {
     const list = notes.map((note, index) => {
-        return (
-            <View key={index.toString()}>
-                <Note note={note} />
-            </View>
-        )
+        if (folderId === note.folderId) {
+            return (
+                <View key={index.toString()}>
+                    <Note id={index} note={note}/>
+                </View>
+            )
+        }
     });
     return (
         <View>
