@@ -58,13 +58,13 @@ const styles = EStyleSheet.create({
     }
 });
 
-export const Note = ({text, onPress, onChangeText}) => {
+export const Note = ({note, onPress, onChangeText}) => {
 
     return (
         <View style={styles.NoteCard}>
             <View style={styles.Header}>
                 <View style={styles.Title}>
-                    <Text style={styles.Text} onPress={onPress}>My true love </Text>
+                    <Text style={styles.Text} onPress={onPress}>{note.title || 'missing'}</Text>
                 </View>
                 <View style={styles.DeleteBtn}>
                     <Button
@@ -76,7 +76,9 @@ export const Note = ({text, onPress, onChangeText}) => {
             <View style={styles.NotePad}>
                 <Text
                     style={styles.Note}
-                    multiline={true}>{text}</Text>
+                    multiline={true}>
+                    {note.text}
+                </Text>
             </View>
         </View>
     )

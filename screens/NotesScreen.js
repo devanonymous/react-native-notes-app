@@ -5,10 +5,12 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Button} from '../components/Button';
 import {Card} from '../components/Card';
 import {NoteList} from '../components/NoteList';
+import {connect} from "react-redux";
+import {addNote} from "../redux/actions/notesActions";
 
 EStyleSheet.build();
 
-export default class NotesScreen extends Component {
+class NotesScreen extends Component {
     static navigationOptions = {
         title: 'Todos',
         headerStyle: {
@@ -20,9 +22,6 @@ export default class NotesScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            noteArray: [
-                {id: 1, content: 'I like bacon and eggs'}
-            ],
             text: '',
             hide: false
         }
@@ -30,14 +29,13 @@ export default class NotesScreen extends Component {
 
     addNote = () => {
         if (this.state.text !== '') {
-            let currentId = this.state.noteArray[this.state.noteArray.length - 1].id;
             let note = {
-                id: currentId + 1,
-                content: this.state.text,
+                folderId: this.props.navigation.state.params.folderId,
+                title: null,
+                text: this.state.text,
             };
-            let notes = [...this.state.noteArray, note];
+            this.props.addNote(note)
             this.setState({
-                noteArray: notes,
                 text: ''
             })
         }
@@ -65,7 +63,7 @@ export default class NotesScreen extends Component {
                 <View style={styles.list}>
                     <ScrollView>
                         <View style={styles.notes}>
-                            <NoteList notes={this.state.noteArray}/>
+                            <NoteList notes={this.props.notes}/>
                         </View>
                     </ScrollView>
                 </View>
@@ -78,6 +76,20 @@ export default class NotesScreen extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        notes: state.notes
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addNote: (note) => dispatch(addNote(note))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotesScreen)
 
 const styles = StyleSheet.create({
     container: {

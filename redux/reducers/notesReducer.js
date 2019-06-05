@@ -6,7 +6,7 @@ const initialState = [];
 const notesReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_NOTE:
-            return [{id: uuidv1(),text:action.payload}, ...state];
+            return [action.payload, ...state];
         case REMOVE_NOTE:
             const newState = [...state];
             newState.splice(action.payload, 1);

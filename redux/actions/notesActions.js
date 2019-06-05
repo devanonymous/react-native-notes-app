@@ -1,11 +1,13 @@
-/**
- * @param {string} name
- */
 import {ADD_NOTE, REMOVE_NOTE, UPDATE_NOTE} from "../actionTypes";
 
-export const addNote = (name) => ({
+/**
+ *
+ * @param {object} note
+ * @returns {{payload: object, type: string}}
+ */
+export const addNote = (note) => ({
         type: ADD_NOTE,
-        payload: name
+        payload: note
 });
 
 /**
