@@ -15,6 +15,7 @@ const viewPadding = 10;
 class FoldersScreen extends Component {
     static navigationOptions = {
         title: 'Folders',
+        headerLeft: null,
         headerStyle: {
             backgroundColor: '#000000'
         },
