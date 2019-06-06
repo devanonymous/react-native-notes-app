@@ -2,7 +2,7 @@ import React from 'react';
 import {
     View,
     Dimensions,
-    Text, TouchableWithoutFeedback,
+    Text
 } from 'react-native';
 import {Ionicons} from '@expo/vector-icons'
 import {Button} from 'react-native-elements';
@@ -58,6 +58,8 @@ const styles = EStyleSheet.create({
         textAlignVertical: 'top'
     },
     Footer: {
+        width: Math.round(Dimensions.get('window').width) - 75,
+        height: 100,
         borderBottomRightRadius: 20,
         borderBottomLeftRadius: 20,
     }
@@ -93,9 +95,7 @@ const Note = ({navigation, id, note, onPress, removeNote, folderId}) => {
                     multiline={true}>
                     {note.text}
                 </Text>
-            </View>
-            <View style={styles.Footer}>
-                <Text>21.04.2019</Text>
+                <Text style={styles.Note}>21.04.2019</Text>
             </View>
         </View>
     )

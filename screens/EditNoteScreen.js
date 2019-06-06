@@ -35,6 +35,7 @@ const styles = EStyleSheet.create({
         padding: 5
     },
     TitleTextInput: {
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 20,
     }
@@ -63,11 +64,8 @@ class EditNoteScreen extends React.Component {
     getId = () => this.props.navigation.state.params.id;
 
     componentDidMount() {
-        console.log('did mount')
         if (this.isEditing()) {
-            console.log('editing')
             const note = this.props.navigation.state.params.note;
-            console.log('note', note)
             this.setState({
                 title: note.title,
                 text: note.text
