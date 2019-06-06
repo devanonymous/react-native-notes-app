@@ -27,25 +27,6 @@ class NotesScreen extends Component {
 
     getFolderId = () => this.props.navigation.state.params.folderId;
 
-    addNote = () => {
-        if (this.state.text !== '') {
-            let note = {
-                folderId: this.props.navigation.state.params.folderId,
-                title: null,
-                text: this.state.text,
-            };
-            this.props.addNote(note)
-            this.setState({
-                text: ''
-            })
-        }
-        this.closeAddNoteScreen();
-    };
-
-    closeAddNoteScreen = () => {
-        this.setState({hide: !this.state.hide})
-    };
-
     render() {
         return (
             <View style={styles.container}>

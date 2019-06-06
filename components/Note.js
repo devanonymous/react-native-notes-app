@@ -8,6 +8,8 @@ import {Ionicons} from '@expo/vector-icons'
 import {Button} from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {connect} from "react-redux";
+import {Container} from "native-base";
+
 import {removeNote} from "../redux/actions/notesActions";
 
 const styles = EStyleSheet.create({
@@ -16,7 +18,7 @@ const styles = EStyleSheet.create({
         backgroundColor: '#1a1823',
         width: Math.round(Dimensions.get('window').width) - 40,
         height: 200,
-        marginTop: 30,
+        marginTop: 3,
         borderRadius: 30,
         borderWidth: 7.5,
         borderColor: '#252333'
@@ -32,6 +34,15 @@ const styles = EStyleSheet.create({
         borderTopLeftRadius: 20,
         backgroundColor: '#00358c'
     },
+    Date: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingRight: 3,
+        paddingLeft: 3,
+        height: 50,
+    },
+
     Title: {
         flexGrow: 1,
         marginLeft: 20,
@@ -72,30 +83,35 @@ const Note = ({navigation, id, note, onPress, removeNote, folderId}) => {
 
 
     return (
-        <View style={styles.NoteCard}>
-            <View style={styles.Header}>
-                <Text style={styles.Text} onPress={onPress}>{note.title || 'missing'}</Text>
-                <View style={styles.Buttons}>
-                    <Button
-                        onPress={onEditButtonPress}
-                        icon={<Ionicons name="md-create" size={32} color="white"/>}
-                        type="clear"
-                    />
-
-                    <Button
-                        onPress={() => removeNote(id)}
-                        icon={<Ionicons name="ios-trash" size={32} color="white"/>}
-                        type="clear"
-                    />
-                </View>
+        <View>
+            <View style={styles.Date}>
+                <Text style={styles.Text}>Date: {note.date}</Text>
             </View>
-            <View style={styles.NotePad}>
-                <Text
-                    style={styles.Note}
-                    multiline={true}>
-                    {note.text}
-                </Text>
-                <Text style={styles.Note}>21.04.2019</Text>
+            <View style={styles.NoteCard}>
+
+                <View style={styles.Header}>
+                    <Text style={styles.Text} onPress={onPress}>{note.title || 'missing'}</Text>
+                    <View style={styles.Buttons}>
+                        <Button
+                            onPress={onEditButtonPress}
+                            icon={<Ionicons name="md-create" size={32} color="white"/>}
+                            type="clear"
+                        />
+
+                        <Button
+                            onPress={() => removeNote(id)}
+                            icon={<Ionicons name="ios-trash" size={32} color="white"/>}
+                            type="clear"
+                        />
+                    </View>
+                </View>
+                <View style={styles.NotePad}>
+                    <Text
+                        style={styles.Note}
+                        multiline={true}>
+                        {note.text}
+                    </Text>
+                </View>
             </View>
         </View>
     )

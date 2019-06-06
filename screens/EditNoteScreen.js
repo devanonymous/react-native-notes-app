@@ -75,6 +75,14 @@ class EditNoteScreen extends React.Component {
 
     getFolderId = () => this.props.navigation.state.params.folderId;
 
+    getDate = () => {
+        const date = new Date().getDate();
+        const month = new Date().getMonth() + 1;
+        const year = new Date().getFullYear();
+
+        return `${date}.${month}.${year}`
+    };
+
     saveNote = () => {
         if (!this.state.title || !this.state.text) {
             alert('title and text have not to be empty')
@@ -83,6 +91,7 @@ class EditNoteScreen extends React.Component {
                 folderId: this.getFolderId(),
                 title: this.state.title,
                 text: this.state.text,
+                date: this.getDate()
             };
             if (this.isEditing()) {
                 this.props.updateNote(this.getId(), note)
