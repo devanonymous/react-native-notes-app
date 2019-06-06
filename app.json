@@ -24,6 +24,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Simple notes app",
+    "githubUrl": "https://github.com/devanonymous/react-native-notes-app"
   }
 }
