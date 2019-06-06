@@ -7,15 +7,17 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from './redux/store';
 import {Provider} from "react-redux";
 import EditNoteScreen from "./screens/EditNoteScreen";
+import LogInScreen from "./screens/LogInScreen";
 
 const RootStack = createStackNavigator(
     {
+        LogIn: LogInScreen,
         Folders: FoldersScreen,
         Notes: NotesScreen,
         EditNote: EditNoteScreen
     },
     {
-        initialRouteName: 'Folders',
+        initialRouteName: 'LogIn',
     }
 );
 
