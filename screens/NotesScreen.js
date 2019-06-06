@@ -5,7 +5,6 @@ import {Icon, Fab } from 'native-base';
 import {connect} from "react-redux";
 
 import {NoteList} from '../components/NoteList';
-import {addNote} from "../redux/actions/notesActions";
 
 EStyleSheet.build();
 
@@ -53,7 +52,7 @@ class NotesScreen extends Component {
                 <View style={styles.list}>
                     <ScrollView>
                         <View style={styles.notes}>
-                            <NoteList folderId={this.props.navigation.state.params.folderId} notes={this.props.notes}/>
+                            <NoteList navigation={this.props.navigation} folderId={this.props.navigation.state.params.folderId} notes={this.props.notes}/>
                         </View>
                     </ScrollView>
                 </View>

@@ -2,8 +2,7 @@ import React from 'react';
 import {
     View,
     Dimensions,
-    Text,
-    TextInput,
+    Text, TouchableWithoutFeedback,
 } from 'react-native';
 import {Ionicons} from '@expo/vector-icons'
 import {Button} from 'react-native-elements';
@@ -23,21 +22,22 @@ const styles = EStyleSheet.create({
         borderColor: '#252333'
     },
     Header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingRight: 3,
+        paddingLeft: 3,
         height: 50,
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
         backgroundColor: '#00358c'
     },
     Title: {
-        // flex: 1,
-        marginTop: 'auto',
+        flexGrow: 1,
         marginLeft: 20,
-        marginBottom: 'auto'
     },
-    DeleteBtn: {
-        marginRight: 3
+    Buttons: {
+        flexDirection: "row",
     },
     Text: {
         fontSize: 20,
@@ -48,8 +48,7 @@ const styles = EStyleSheet.create({
         margin: 10,
         width: Math.round(Dimensions.get('window').width) - 75,
         height: Math.round(Dimensions.get('window').height) - 135,
-        borderBottomRightRadius: 20,
-        borderBottomLeftRadius: 20,
+
         padding: 10
     },
     Note: {
@@ -57,18 +56,30 @@ const styles = EStyleSheet.create({
         flex: 1,
         fontSize: 16,
         textAlignVertical: 'top'
+    },
+    Footer: {
+        borderBottomRightRadius: 20,
+        borderBottomLeftRadius: 20,
     }
 });
 
-const Note = ({id, note, onPress, onChangeText, removeNote}) => {
+const Note = ({navigation, id, note, onPress, removeNote, folderId}) => {
+    const onEditButtonPress = () => {
+        navigation.navigate('EditNote', {note, id, folderId})
+    };
+
 
     return (
         <View style={styles.NoteCard}>
             <View style={styles.Header}>
-                <View style={styles.Title}>
-                    <Text style={styles.Text} onPress={onPress}>{note.title || 'missing'}</Text>
-                </View>
-                <View style={styles.DeleteBtn}>
+                <Text style={styles.Text} onPress={onPress}>{note.title || 'missing'}</Text>
+                <View style={styles.Buttons}>
+                    <Button
+                        onPress={onEditButtonPress}
+                        icon={<Ionicons name="md-create" size={32} color="white"/>}
+                        type="clear"
+                    />
+
                     <Button
                         onPress={() => removeNote(id)}
                         icon={<Ionicons name="ios-trash" size={32} color="white"/>}
@@ -82,6 +93,9 @@ const Note = ({id, note, onPress, onChangeText, removeNote}) => {
                     multiline={true}>
                     {note.text}
                 </Text>
+            </View>
+            <View style={styles.Footer}>
+                <Text>21.04.2019</Text>
             </View>
         </View>
     )

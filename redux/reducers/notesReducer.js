@@ -1,5 +1,5 @@
 import uuidv1 from "uuid/v1";
-import {ADD_NOTE, REMOVE_NOTE} from "../actionTypes";
+import {ADD_NOTE, REMOVE_NOTE, UPDATE_NOTE} from "../actionTypes";
 
 const initialState = [];
 
@@ -11,6 +11,10 @@ const notesReducer = (state = initialState, action) => {
             const newState = [...state];
             newState.splice(action.payload, 1);
             return newState;
+        case UPDATE_NOTE:
+            const updateNoteState = [...state];
+            updateNoteState[action.payload.id] = action.payload.note;
+            return updateNoteState;
         default:
             return state
     }

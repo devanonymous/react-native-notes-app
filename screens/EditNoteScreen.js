@@ -3,7 +3,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import {Dimensions, Text, TextInput, View} from "react-native";
 import {Divider} from "react-native-elements";
 import {Fab, Icon, Container} from "native-base";
-import {addNote} from "../redux/actions/notesActions";
+import {addNote, updateNote} from "../redux/actions/notesActions";
 import {connect} from "react-redux";
 
 const styles = EStyleSheet.create({
@@ -49,10 +49,31 @@ class EditNoteScreen extends React.Component {
         headerTintColor: '#fff',
     };
 
-    state = {
-        title: "",
-        text: "",
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: "",
+            text: "",
+        };
+    }
+
+
+    isEditing = () => !!this.props.navigation.state.params.note;
+
+    getId = () => this.props.navigation.state.params.id;
+
+    componentDidMount() {
+        console.log('did mount')
+        if (this.isEditing()) {
+            console.log('editing')
+            const note = this.props.navigation.state.params.note;
+            console.log('note', note)
+            this.setState({
+                title: note.title,
+                text: note.text
+            })
+        }
+    }
 
     getFolderId = () => this.props.navigation.state.params.folderId;
 
@@ -65,17 +86,21 @@ class EditNoteScreen extends React.Component {
                 title: this.state.title,
                 text: this.state.text,
             };
-            this.props.addNote(note);
+            if (this.isEditing()) {
+                this.props.updateNote(this.getId(), note)
+            } else {
+                this.props.addNote(note);
+            }
             this.props.navigation.goBack();
         }
     };
 
     onChangeTitle = text => {
-      this.setState({text: text})
+        this.setState({title: text})
     };
 
     onChangeText = text => {
-        this.setState({title: text})
+        this.setState({text: text})
     };
 
     render() {
@@ -86,8 +111,9 @@ class EditNoteScreen extends React.Component {
                         <View style={styles.Title}>
                             <TextInput
                                 style={styles.TitleTextInput}
-                                multiline={true}
+                                multiline={false}
                                 placeholder='Title'
+                                value={this.state.title}
                                 onChangeText={this.onChangeTitle}/>
                         </View>
                     </View>
@@ -97,6 +123,7 @@ class EditNoteScreen extends React.Component {
                             style={styles.Note}
                             multiline={true}
                             placeholder='New Note...'
+                            value={this.state.text}
                             onChangeText={this.onChangeText}/>
                     </View>
                 </View>
@@ -114,7 +141,8 @@ class EditNoteScreen extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addNote: (note) => dispatch(addNote(note))
+        addNote: (note) => dispatch(addNote(note)),
+        updateNote: (id, note) => dispatch(updateNote(id,note))
     }
 };
 

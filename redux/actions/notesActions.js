@@ -20,10 +20,10 @@ export const removeNote = (id) => ({
 
 /**
  * @param {number} id
- * @param {string} text
- * @returns {{payload: {id: number, text: string}, type: string}}
+ * @param {{text: string, title: string}} note
+ * @returns {{payload: {id: number, note: object}, type: string}}
  */
-export const updateNote = (id, text) => ({
+export const updateNote = (id, note) => ({
     type: UPDATE_NOTE,
-    payload: {id, text}
+    payload: {id, note: note}
 });

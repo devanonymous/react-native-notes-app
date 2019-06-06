@@ -16,7 +16,6 @@ class Folder extends React.Component {
     }
 
 
-
     /**
      * @param { string } folderId uuid
      */
@@ -80,7 +79,7 @@ class Folder extends React.Component {
     );
 
     render () {
-        const {item, styles, navigation, id, dispatch} = this.props;
+        const {item, styles} = this.props;
         return (
             <TouchableWithoutFeedback onPress={this.onFolderPress(item.id)}>
                 <View>
