@@ -53,7 +53,7 @@ class Folder extends React.Component {
             />
 
             <Button
-                onPress={() => this.props.removeFolder(this.props.folderId)}
+                onPress={() => this.props.removeFolder(this.props.id)}
                 icon={<Ionicons name="ios-trash" size={32} color="white"/>}
                 type="clear"
             />
