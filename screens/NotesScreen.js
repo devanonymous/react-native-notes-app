@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {Dimensions, StatusBar, ScrollView, StyleSheet, View} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-
-import {Button} from '../components/Button';
-import {Card} from '../components/Card';
-import {NoteList} from '../components/NoteList';
+import {Icon, Fab } from 'native-base';
 import {connect} from "react-redux";
+
+import {NoteList} from '../components/NoteList';
 import {addNote} from "../redux/actions/notesActions";
 
 EStyleSheet.build();
@@ -27,6 +26,8 @@ class NotesScreen extends Component {
         }
     }
 
+    getFolderId = () => this.props.navigation.state.params.folderId;
+
     addNote = () => {
         if (this.state.text !== '') {
             let note = {
@@ -47,17 +48,6 @@ class NotesScreen extends Component {
     };
 
     render() {
-        if (this.state.hide) {
-            return (
-                <View style={styles.container}>
-                    <Card
-                        text={this.state.text}
-                        onPress={this.addNote}
-                        close={this.closeAddNoteScreen}
-                        onChangeText={(text) => this.setState({text})}/>
-                </View>
-            )
-        }
         return (
             <View style={styles.container}>
                 <View style={styles.list}>
@@ -67,11 +57,13 @@ class NotesScreen extends Component {
                         </View>
                     </ScrollView>
                 </View>
-                <View style={styles.bottomcontainer}>
-                    <Button
-                        text='+'
-                        onPress={(hide) => this.setState({hide: !this.state.hide})}/>
-                </View>
+                <Fab
+                    containerStyle={{ }}
+                    style={{ backgroundColor: '#5067FF' }}
+                    position="bottomRight"
+                    onPress={() => this.props.navigation.navigate('EditNote', {title: "Add note", folderId: this.getFolderId()})}>
+                    <Icon name="add" />
+                </Fab>
             </View>
         );
     }
@@ -83,13 +75,7 @@ const mapStateToProps = state => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addNote: (note) => dispatch(addNote(note))
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NotesScreen)
+export default connect(mapStateToProps)(NotesScreen)
 
 const styles = StyleSheet.create({
     container: {
