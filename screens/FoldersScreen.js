@@ -53,7 +53,7 @@ class FoldersScreen extends Component {
                 <FlatList
                     style={styles.list}
                     data={folders}
-                    renderItem={({item, index}) => <Folder navigation={this.props.navigation} folderId={index} item={item} styles={styles}/>
+                    renderItem={({item, index}) => <Folder navigation={this.props.navigation} id={index} item={item} styles={styles}/>
 
                     }
                     keyExtractor={(item, index) => index.toString()}
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     listItem: {
+        flexGrow: 1,
         color: "#9c9c9c",
         paddingTop: 2,
         paddingBottom: 2,

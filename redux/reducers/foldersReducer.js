@@ -1,4 +1,4 @@
-import {ADD_FOLDER, REMOVE_FOLDER} from "../actionTypes";
+import {ADD_FOLDER, REMOVE_FOLDER, UPDATE_FOLDER} from "../actionTypes";
 import uuidv1 from 'uuid/v1';
 
 const initialState = [];
@@ -11,6 +11,10 @@ const foldersReducer = (state = initialState, action) => {
             const newState = [...state];
             newState.splice(action.payload, 1);
             return newState;
+        case UPDATE_FOLDER:
+            const updateFolderState = [...state];
+            updateFolderState[action.payload.id].text = action.payload.folderName;
+            return updateFolderState;
         default:
             return state
     }
