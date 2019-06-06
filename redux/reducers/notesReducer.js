@@ -1,4 +1,3 @@
-import uuidv1 from "uuid/v1";
 import {ADD_NOTE, REMOVE_NOTE, UPDATE_NOTE} from "../actionTypes";
 
 const initialState = [];

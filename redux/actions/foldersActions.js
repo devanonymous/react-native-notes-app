@@ -3,12 +3,10 @@ import {ADD_FOLDER, REMOVE_FOLDER, UPDATE_FOLDER} from "../actionTypes";
 /**
  * @param {string} name
  */
-export const addFolder = (name) => {
-    return {
-        type: ADD_FOLDER,
-        payload: name
-    }
-};
+export const addFolder = (name) => ({
+    type: ADD_FOLDER,
+    payload: name
+});
 
 
 /**
@@ -26,6 +24,6 @@ export const updateFolder = (id, folderName) => ({
  * @param {number} id
  */
 export const removeFolder = (id) => ({
-        type: REMOVE_FOLDER,
-        payload: id
-    });
+    type: REMOVE_FOLDER,
+    payload: id
+});

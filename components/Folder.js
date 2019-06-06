@@ -27,6 +27,9 @@ class Folder extends React.Component {
         this.setState({isRenaming: true});
     };
 
+    /**
+     * @param {string} text
+     */
     changeTextHandler = (text) => {
         this.setState({text});
     };
@@ -89,7 +92,7 @@ class Folder extends React.Component {
             </TouchableWithoutFeedback>
         )
     }
-};
+}
 
 const mapDispatchToProps = dispatch => {
     return {

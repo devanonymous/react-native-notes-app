@@ -8,7 +8,6 @@ import {Ionicons} from '@expo/vector-icons'
 import {Button} from 'react-native-elements';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {connect} from "react-redux";
-import {Container} from "native-base";
 
 import {removeNote} from "../redux/actions/notesActions";
 
@@ -68,15 +67,9 @@ const styles = EStyleSheet.create({
         fontSize: 16,
         textAlignVertical: 'top'
     },
-    Footer: {
-        width: Math.round(Dimensions.get('window').width) - 75,
-        height: 100,
-        borderBottomRightRadius: 20,
-        borderBottomLeftRadius: 20,
-    }
 });
 
-const Note = ({navigation, id, note, onPress, removeNote, folderId}) => {
+const Note = ({navigation, id, note, removeNote, folderId}) => {
     const onEditButtonPress = () => {
         navigation.navigate('EditNote', {note, id, folderId})
     };
@@ -90,7 +83,7 @@ const Note = ({navigation, id, note, onPress, removeNote, folderId}) => {
             <View style={styles.NoteCard}>
 
                 <View style={styles.Header}>
-                    <Text style={styles.Text} onPress={onPress}>{note.title || 'missing'}</Text>
+                    <Text style={styles.Text}>{note.title || 'missing'}</Text>
                     <View style={styles.Buttons}>
                         <Button
                             onPress={onEditButtonPress}
