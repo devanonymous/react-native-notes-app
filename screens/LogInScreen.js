@@ -46,7 +46,7 @@ class LogInScreen extends Component {
 
     async componentDidMount() {
         if (this.props.isLogined) {
-            this.props.navigation.push('Folders');
+            this.props.navigation.navigate('Folders');
         }
         await Font.loadAsync({
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
@@ -56,19 +56,20 @@ class LogInScreen extends Component {
         this.setState({fontLoaded: true})
     }
 
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.state.email.toLowerCase() === userData.email && this.state.password === userData.password) {
-            this.login();
-        }
-    }
-
     changeEmailHandler = text => {
         this.setState({email: text})
     };
 
     changePasswordHandler = text => {
         this.setState({password: text})
+    };
+
+    onLoginButtonPress = () => {
+        if (this.state.email.toLowerCase() === userData.email && this.state.password === userData.password) {
+            this.login();
+        } else {
+            alert('incorrect email or password');
+        }
     };
 
     login = () => {
@@ -120,7 +121,7 @@ class LogInScreen extends Component {
                     <Content>
                         <Text style={styles.Text}>email: admin@yandex.ru, Password: admin </Text>
                         {this.renderInputs()}
-                        <Button full primary style={{paddingBottom: 4}} title={"Login"}>
+                        <Button onPress={this.onLoginButtonPress} full primary style={{paddingBottom: 4}} title={"Login"}>
                             <Text>Login</Text>
                         </Button>
                     </Content>
@@ -131,6 +132,8 @@ class LogInScreen extends Component {
             </Container>
         );
     }
+
+
 }
 
 

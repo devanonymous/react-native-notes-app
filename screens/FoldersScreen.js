@@ -4,10 +4,11 @@ import {
     Text,
     View,
     FlatList,
-    TextInput
+    TextInput,
+    Button
 } from "react-native";
-import Folder from "../components/Folder";
 import {connect} from "react-redux";
+import Folder from "../components/Folder";
 import {addFolder} from "../redux/actions/foldersActions";
 
 const viewPadding = 10;
@@ -19,6 +20,13 @@ class FoldersScreen extends Component {
         headerStyle: {
             backgroundColor: '#000000'
         },
+        headerRight: (
+            <Button
+                onPress={() => alert('This is a button!')}
+                title="Logout"
+                color="#000"
+            />
+        ),
         headerTintColor: '#fff',
     };
 
