@@ -74,11 +74,11 @@ const styles = StyleSheet.create({
     },
     list: {
         flex: 1,
-        marginTop: StatusBar.currentHeight,
+        marginTop: 2,
         width: Math.round(Dimensions.get('window').width),
     },
     notes: {
-        marginTop: 40,
+        marginTop: 1,
         marginLeft: 20,
         marginBottom: 20
     }

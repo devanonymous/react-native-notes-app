@@ -10,7 +10,9 @@ import {logIn} from "../redux/actions/authActions";
 
 const styles = {
     Container: {
-        backgroundColor: "#000000"
+        backgroundColor: "#000000",
+        alignItems: "center",
+        justifyContent: "center",
     },
     Text: {
         color: "white",
@@ -19,7 +21,13 @@ const styles = {
         fontWeight: 'bold',
     },
     Input: {
-        color: "white"
+        flexGrow: 1,
+        color: "white",
+        padding: 0,
+        margin: 0
+    },
+    Item: {
+        flexGrow: 1,
     }
 };
 
@@ -94,9 +102,11 @@ class LogInScreen extends Component {
 
     renderInputs = () => {
         return (
-            <Form>
+            <Form style={{padding: 0}}>
                 <Item
+                    last
                     success={this.isCorrectEmail()}
+                    style={styles.Item}
                 >
                     <Input
                         style={styles.Input}
@@ -108,7 +118,10 @@ class LogInScreen extends Component {
                         onSubmitEditing={() => { this.focusTheField('field2'); }}
                     />
                 </Item>
-                <Item last>
+                <Item
+                    last
+                    style={styles.Item}
+                >
                     <Input
                         ref={input => { this.inputs['field2'] = input }}
                         secureTextEntry={true} style={styles.Input}

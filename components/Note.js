@@ -43,13 +43,16 @@ const styles = EStyleSheet.create({
     },
 
     Title: {
-        flexGrow: 1,
-        marginLeft: 20,
+        marginLeft: 7,
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#fff'
     },
     Buttons: {
         flexDirection: "row",
     },
     Text: {
+        marginLeft: 3,
         fontSize: 20,
         fontWeight: 'bold',
         color: '#fff'
@@ -59,7 +62,7 @@ const styles = EStyleSheet.create({
         width: Math.round(Dimensions.get('window').width) - 75,
         height: Math.round(Dimensions.get('window').height) - 135,
 
-        padding: 10
+        padding: 3
     },
     Note: {
         color: '#fff',
@@ -95,7 +98,7 @@ const Note = ({navigation, id, note, removeNote, folderId}) => {
             <View style={styles.NoteCard}>
 
                 <View style={styles.Header}>
-                    <Text style={styles.Text}>{note.title || 'missing'}</Text>
+                    <Text style={styles.Title}>{note.title || 'missing'}</Text>
                     <View style={styles.Buttons}>
                         <Button
                             onPress={onEditButtonPress}

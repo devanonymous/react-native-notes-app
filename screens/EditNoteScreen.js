@@ -24,6 +24,7 @@ const styles = EStyleSheet.create({
         backgroundColor: '#4a4a4a',
     },
     Note: {
+        marginLeft: 4,
         color: '#fff',
         flex: 1,
         fontSize: 16,
