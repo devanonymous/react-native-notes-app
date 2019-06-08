@@ -136,9 +136,9 @@ class EditNoteScreen extends React.Component {
                     </View>
                 </View>
                 <Fab
-                    containerStyle={{}}
+                    containerStyle={{top: 2}}
                     style={{backgroundColor: '#5067FF'}}
-                    position="bottomRight"
+                    position="topRight"
                     onPress={this.saveNote}>
                     <Icon name="save"/>
                 </Fab>
