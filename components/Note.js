@@ -2,7 +2,7 @@ import React from 'react';
 import {
     View,
     Dimensions,
-    Text
+    Text, Alert
 } from 'react-native';
 import {Ionicons} from '@expo/vector-icons'
 import {Button} from 'react-native-elements';
@@ -75,6 +75,18 @@ const Note = ({navigation, id, note, removeNote, folderId}) => {
     };
 
 
+    const deleteNote = () => {
+        Alert.alert(
+            'Remove note',
+            'Are you sure?',
+            [
+                {text: 'Cancel', onPress: () => {}},
+                {text: 'Yes', onPress: () =>  removeNote(id)},
+            ],
+            {cancelable: false},
+        );
+    };
+
     return (
         <View>
             <View style={styles.Date}>
@@ -92,7 +104,7 @@ const Note = ({navigation, id, note, removeNote, folderId}) => {
                         />
 
                         <Button
-                            onPress={() => removeNote(id)}
+                            onPress={deleteNote}
                             icon={<Ionicons name="ios-trash" size={32} color="white"/>}
                             type="clear"
                         />

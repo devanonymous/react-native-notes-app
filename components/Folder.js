@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TouchableWithoutFeedback, TextInput} from "react-native";
+import {Text, View, TouchableWithoutFeedback, TextInput, Alert} from "react-native";
 import {Button} from "react-native-elements";
 
 import {Ionicons} from '@expo/vector-icons'
@@ -42,6 +42,18 @@ class Folder extends React.Component {
         })
     };
 
+    deleteFolder = () => {
+        Alert.alert(
+            'Remove folder',
+            'Are you sure?',
+            [
+                {text: 'Cancel', onPress: () => {}},
+                {text: 'Yes', onPress: () =>  this.props.removeFolder(this.props.id)},
+            ],
+            {cancelable: false},
+        );
+    };
+
     renderFolder = () => (
         <View style={this.props.styles.listItemCont}>
             <Text style={this.props.styles.listItem}>
@@ -55,7 +67,7 @@ class Folder extends React.Component {
             />
 
             <Button
-                onPress={() => this.props.removeFolder(this.props.id)}
+                onPress={this.deleteFolder}
                 icon={<Ionicons name="ios-trash" size={32} color="white"/>}
                 type="clear"
             />

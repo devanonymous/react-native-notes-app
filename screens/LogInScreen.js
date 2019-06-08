@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {Container, Content, Form, Item, Input, Text, Button} from 'native-base';
+import {Button, Container, Content, Form, Input, Item, Text} from 'native-base';
 import validator from "email-validator";
-import {logIn} from "../redux/actions/authActions";
 import {connect} from "react-redux";
 import {Ionicons} from "@expo/vector-icons";
 import {Font} from 'expo';
+import sha256 from 'js-sha256'
+
+import {logIn} from "../redux/actions/authActions";
 
 const styles = {
     Container: {
@@ -21,7 +23,7 @@ const styles = {
     }
 };
 
-const userData = {email: "admin@yandex.ru", password: "admin"};
+const userData = {email: "admin@yandex.ru", password: sha256("admin")};
 
 class LogInScreen extends Component {
     static navigationOptions = {
@@ -65,10 +67,14 @@ class LogInScreen extends Component {
     };
 
     onLoginButtonPress = () => {
-        if (this.state.email.toLowerCase() === userData.email && this.state.password === userData.password) {
+        if (this.state.email.toLowerCase() === userData.email && sha256(this.state.password) === userData.password) {
             this.login();
         } else {
-            alert('incorrect email or password');
+            if (this.state.email.toLowerCase() !== userData.email) {
+                alert('incorrect email');
+            } else {
+                alert('incorrect password');
+            }
         }
     };
 
@@ -77,7 +83,9 @@ class LogInScreen extends Component {
         this.props.navigation.push('Folders');
     };
 
-    isCorrectEmail = () => this.state.email.toLowerCase() === userData.email;
+    isCorrectEmail = () => {
+        return validator.validate(this.state.email);
+    };
 
     focusTheField = (id) => {
         console.log(this.inputs);
@@ -88,7 +96,6 @@ class LogInScreen extends Component {
         return (
             <Form>
                 <Item
-                    error={!validator.validate(this.props.email)}
                     success={this.isCorrectEmail()}
                 >
                     <Input

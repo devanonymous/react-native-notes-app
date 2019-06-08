@@ -8,3 +8,4 @@ export const REMOVE_NOTE = "REMOVE_NOTE";
 export const UPDATE_NOTE = "UPDATE_NOTE";
 /* auth */
 export const LOG_IN = "LOG_IN";
+export const LOG_OUT = "LOG_OUT";

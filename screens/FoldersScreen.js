@@ -5,16 +5,18 @@ import {
     View,
     FlatList,
     TextInput,
-    Button
+    Button,
+    BackHandler
 } from "react-native";
 import {connect} from "react-redux";
 import Folder from "../components/Folder";
 import {addFolder} from "../redux/actions/foldersActions";
-
+import {store} from '../redux/store';
+import {logOut} from "../redux/actions/authActions";
 const viewPadding = 10;
 
 class FoldersScreen extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'Folders',
         headerLeft: null,
         headerStyle: {
@@ -22,15 +24,24 @@ class FoldersScreen extends Component {
         },
         headerRight: (
             <Button
-                onPress={() => alert('This is a button!')}
+                onPress={() => {
+                    navigation.navigate('LogIn');
+                    store.dispatch(logOut())
+                }}
                 title="Logout"
                 color="#000"
             />
         ),
         headerTintColor: '#fff',
-    };
+    });
 
     state = {text: ''};
+
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', function() {
+            return true;
+        });
+    }
 
     changeTextHandler = (text) => {
         this.setState({text});
